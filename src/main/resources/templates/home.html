@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Country Select</title>
+</head>
+<body>
+<h1>Country Select</h1>
+<form th:action="@{/country}" method="post">
+    <label for="country">Select a Country:</label>
+    <select id="country" name="country">
+        <option value="">--Select a Country--</option>
+        <th:block th:each="country : ${T(java.util.Locale).getAvailableLocales()}">
+            <th:block th:if="${not #strings.isEmpty(country.getCountry().trim())}">
+                <option th:value="${country.getCountry()}" th:text="${country.getDisplayCountry()}"></option>
+            </th:block>
+        </th:block>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
